@@ -12,7 +12,7 @@ const AnimeList = ({ data, onChangePage, currentPage }) => {
           <ListWrapper>
             {media.map((item) => {
               return (
-                <AnimeItem key={item.id}>
+                <AnimeItem key={item.id} href={`details/${item.id}`}>
                   <img
                     src={
                       item.bannerImage

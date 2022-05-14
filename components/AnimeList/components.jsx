@@ -6,7 +6,7 @@ export const ListWrapper = styled.div`
   gap: 24px;
 `;
 
-export const AnimeItem = styled.button`
+export const AnimeItem = styled.a`
   all: unset;
   cursor: pointer;
   background-color: #f0f0f0;
@@ -46,4 +46,8 @@ export const EmptyWrapper = styled.div`
 export const AnimeTitle = styled.div`
   display: flex;
   flex-direction: column;
+
+  label {
+    font-style: italic;
+  }
 `;
