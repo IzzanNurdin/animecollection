@@ -1,8 +1,11 @@
 import Head from "next/head";
 import React from "react";
 import styles from "../styles/Home.module.css";
+import styled from "@emotion/styled";
 import { useQuery, gql } from "@apollo/client";
 import AnimeList from "../components/AnimeList";
+import SearchBar from "../components/SearchBar";
+import Loader from "../components/Loader";
 
 const GET_ANIME = gql`
   query ($search: String, $page: Int) {
@@ -34,21 +37,38 @@ const GET_ANIME = gql`
   }
 `;
 
-function GetAnime({ currentPage, onChangePage }) {
+const ListWrapper = styled.div`
+  width: 100%;
+  padding: 48px 64px;
+`;
+
+function GetAnime({ querySearch, currentPage, onChangePage }) {
   const { loading, error, data } = useQuery(GET_ANIME, {
-    variables: { search: "Shingeki", page: currentPage },
+    variables: { search: querySearch, page: currentPage },
   });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>Error : {error}</p>;
 
   // return console.log(data);
 
-  return <AnimeList data={data} onChangePage={onChangePage} />;
+  return (
+    <AnimeList
+      data={data}
+      onChangePage={onChangePage}
+      currentPage={currentPage}
+    />
+  );
 }
 
 export default function Home() {
   const [currentPage, setCurrentPage] = React.useState(1);
+  const [querySearch, setQuerySearch] = React.useState("Shingeki");
+
+  function setQuery(value) {
+    setQuerySearch(value);
+    setCurrentPage(1);
+  }
 
   return (
     <div className={styles.container}>
@@ -57,7 +77,17 @@ export default function Home() {
         <meta name="description" content="Anime List from AniList" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <GetAnime currentPage={currentPage} onChangePage={setCurrentPage} />
+      <SearchBar value={querySearch} onChange={setQuery} />
+      <ListWrapper>
+        <GetAnime
+          querySearch={querySearch}
+          currentPage={currentPage}
+          onChangePage={(page) => {
+            setCurrentPage(page);
+            window.scrollTo(0, 0);
+          }}
+        />
+      </ListWrapper>
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import React from "react";
-import ReactPaginate from "react-paginate";
 import styled from "@emotion/styled";
 import { GoChevronRight, GoChevronLeft } from "react-icons/go";
 
-const StyledPagination = styled(ReactPaginate)`
+const StyledPagination = styled.ul`
   display: flex;
   gap: 24px;
+  margin-top: 48px;
   justify-content: center;
   list-style-type: none;
 
@@ -13,36 +13,50 @@ const StyledPagination = styled(ReactPaginate)`
     padding: 10px;
     cursor: pointer;
 
-    &.disabled {
-      background-color: #aeaeae;
+    button {
+      all: unset;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     &.previous,
     &.next {
-      border: 1p xsolid black;
+      border: 1px solid black;
       border-radius: 8px;
-    }
 
-    &.selected {
-      border: 1p xsolid black;
-      border-radius: 8px;
-      background-color: #88b0d7;
-      color: white;
+      &.disabled {
+        background-color: #aeaeae;
+      }
+
+      &:hover {
+        background-color: #eaeaea;
+      }
     }
   }
 `;
 
-const Pagination = ({ handlePageClick, pageCount }) => {
+const Pagination = ({ handlePageClick, currentPage, hasNextPage }) => {
   return (
-    <StyledPagination
-      breakLabel="..."
-      nextLabel={<GoChevronRight />}
-      onPageChange={(e) => handlePageClick(e.selected + 1)}
-      pageRangeDisplayed={5}
-      pageCount={pageCount}
-      previousLabel={<GoChevronLeft />}
-      renderOnZeroPageCount={null}
-    />
+    <StyledPagination>
+      <li className={`previous ${currentPage === 1 ? "disabled" : ""}`}>
+        <button
+          disabled={currentPage === 1}
+          onClick={() => handlePageClick(currentPage - 1)}
+        >
+          <GoChevronLeft />
+          Previous
+        </button>
+      </li>
+      <li className={`next ${!hasNextPage ? "disabled" : ""}`}>
+        <button
+          disabled={!hasNextPage}
+          onClick={() => handlePageClick(currentPage + 1)}
+        >
+          Next <GoChevronRight />
+        </button>
+      </li>
+    </StyledPagination>
   );
 };
 
