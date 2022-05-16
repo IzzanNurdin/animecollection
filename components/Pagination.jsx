@@ -10,12 +10,12 @@ const StyledPagination = styled.ul`
   list-style-type: none;
 
   li {
-    padding: 10px;
     cursor: pointer;
 
     button {
       all: unset;
       display: flex;
+      padding: 10px;
       align-items: center;
       gap: 12px;
     }
@@ -31,6 +31,7 @@ const StyledPagination = styled.ul`
 
       &:hover {
         background-color: #eaeaea;
+        color: black;
       }
     }
   }

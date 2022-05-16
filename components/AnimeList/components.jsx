@@ -9,7 +9,7 @@ export const ListWrapper = styled.div`
 export const AnimeItem = styled.a`
   all: unset;
   cursor: pointer;
-  background-color: #f0f0f0;
+  background-color: #101010;
   border: 1px solid black;
   display: flex;
   gap: 24px;

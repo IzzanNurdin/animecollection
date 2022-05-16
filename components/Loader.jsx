@@ -5,6 +5,7 @@ const LoaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 24px;
   width: 100%;
 
   .rotate {

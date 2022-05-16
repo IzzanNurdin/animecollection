@@ -4,7 +4,7 @@ export const DetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 48px 64px;
+  padding: 0px 64px 48px 64px;
 `;
 
 export const AnimeItem = styled.div`
@@ -13,12 +13,13 @@ export const AnimeItem = styled.div`
 
   img {
     border-radius: 8px;
+    margin-bottom: 24px;
   }
 
   h2,
   h3,
   p {
-    margin: 12px 0px;
+    margin: 8px 0px;
   }
 `;
 
@@ -29,7 +30,22 @@ export const EmptyWrapper = styled.div`
 
 export const AnimeMeta = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 24px;
+  height: 100%;
+  flex-wrap: wrap;
+
+  .description {
+    width: 100%;
+  }
+
+  .section {
+    width: 45%;
+  }
+
+  h2 {
+    color: firebrick;
+  }
 
   label {
     font-style: italic;

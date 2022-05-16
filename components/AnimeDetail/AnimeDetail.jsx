@@ -1,6 +1,8 @@
 import React from "react";
 import { AnimeItem, DetailWrapper, AnimeMeta, BackButton } from "./components";
 import { RiArrowGoBackLine } from "react-icons/ri";
+import ReactHtmlParser from "react-html-parser";
+import { dateParser } from "../../utils/dateParser";
 
 const AnimeDetail = ({ data }) => {
   const { Media } = data;
@@ -15,6 +17,11 @@ const AnimeDetail = ({ data }) => {
       </BackButton>
       <DetailWrapper>
         <AnimeItem>
+          <h1>
+            {`${Media.title.native ? Media.title.native : "-"} / ${
+              Media.title.romaji ? Media.title.romaji : "-"
+            } / ${Media.title.english ? Media.title.english : "-"}`}
+          </h1>
           <img
             src={
               Media.bannerImage
@@ -24,21 +31,50 @@ const AnimeDetail = ({ data }) => {
             alt={`anime-${Media.title.native}`}
           />
           <AnimeMeta>
-            <h2>Title</h2>
-            <label>Native</label>
-            <h3>{Media.title.native ? Media.title.native : "-"}</h3>
-            <label>Romaji</label>
-            <h3>{Media.title.romaji ? Media.title.romaji : "-"}</h3>
-            <label>English</label>
-            <h3>{Media.title.english ? Media.title.english : "-"}</h3>
-            <h2>Description</h2>
-            <p>{Media.description ? Media.description : "-"}</p>
-            <h2>Genres</h2>
-            <p>{Media.genres ? Media.genres.join(", ") : "-"}</p>
-            <h2>Trending</h2>
-            <p>{Media.trending !== 0 ? `No. ${Media.trending}` : "-"}</p>
-            <h2>Total Episodes</h2>
-            <p>{Media.episodes}</p>
+            <div className="description">
+              <h2>Description</h2>
+              <p>
+                {Media.description ? ReactHtmlParser(Media.description) : "-"}
+              </p>
+            </div>
+            <div className="section">
+              <h2>Genres</h2>
+              <p>{Media.genres ? Media.genres.join(", ") : "-"}</p>
+            </div>
+            <div className="section">
+              <h2>Trending</h2>
+              <p>{Media.trending !== 0 ? `No. ${Media.trending}` : "-"}</p>
+            </div>
+            <div className="section">
+              <h2>Total Episodes</h2>
+              <p>{Media.episodes}</p>
+            </div>
+            <div className="section">
+              <h2>Format</h2>
+              <p>{Media.format}</p>
+            </div>
+            <div className="section">
+              <h2>Start Date</h2>
+              <p>
+                {dateParser(
+                  Media.startDate.day,
+                  Media.startDate.month,
+                  Media.startDate.year
+                )}
+              </p>
+            </div>
+            <div className="section">
+              <h2>End Date</h2>
+              <p>
+                {Media.endDate !== {}
+                  ? dateParser(
+                      Media.endDate.day,
+                      Media.endDate.month,
+                      Media.endDate.year
+                    )
+                  : "-"}
+              </p>
+            </div>
           </AnimeMeta>
         </AnimeItem>
       </DetailWrapper>

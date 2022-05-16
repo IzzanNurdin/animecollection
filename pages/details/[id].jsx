@@ -14,6 +14,11 @@ const GET_ANIME_BY_ID = gql`
         month
         day
       }
+      endDate {
+        year
+        month
+        day
+      }
       season
       seasonYear
       bannerImage
@@ -21,6 +26,7 @@ const GET_ANIME_BY_ID = gql`
       genres
       trending
       episodes
+      format
       title {
         native
         romaji
