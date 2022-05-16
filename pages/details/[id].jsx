@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { gql, useQuery } from "@apollo/client";
 import Loader from "../../components/Loader";
@@ -53,7 +54,16 @@ const Details = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  return <GetAnimeByID id={id} />;
+  return (
+    <div>
+      <Head>
+        <title>Anime Detail</title>
+        <meta name="description" content="Anime Detail from AniList" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <GetAnimeByID id={id} />
+    </div>
+  );
 };
 
 export default Details;
