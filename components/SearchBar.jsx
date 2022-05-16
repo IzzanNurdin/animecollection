@@ -24,6 +24,7 @@ export default function SearchBar({ value, onChange }) {
       <Input
         value={value}
         debounceTimeout={500}
+        placeholder="Find your anime here"
         type="text"
         onChange={(e) => onChange(e.target.value)}
       />

@@ -6,6 +6,7 @@ import { useQuery, gql } from "@apollo/client";
 import AnimeList from "../components/AnimeList";
 import SearchBar from "../components/SearchBar";
 import Loader from "../components/Loader";
+import { getSessionStorage, setSessionStorage } from "../utils/webStorage";
 
 const GET_ANIME = gql`
   query ($search: String, $page: Int) {
@@ -63,12 +64,20 @@ function GetAnime({ querySearch, currentPage, onChangePage }) {
 
 export default function Home() {
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [querySearch, setQuerySearch] = React.useState("Shingeki");
+  const [querySearch, setQuerySearch] = React.useState(null);
 
-  function setQuery(value) {
+  React.useEffect(() => {
+    setQuerySearch(getSessionStorage("search"));
+    setCurrentPage(
+      getSessionStorage("last_page") ? getSessionStorage("last_page") : 1
+    );
+  }, []);
+
+  const setQuery = React.useCallback((value) => {
     setQuerySearch(value);
     setCurrentPage(1);
-  }
+    setSessionStorage("search", value);
+  });
 
   return (
     <div className={styles.container}>
@@ -84,6 +93,7 @@ export default function Home() {
           currentPage={currentPage}
           onChangePage={(page) => {
             setCurrentPage(page);
+            setSessionStorage("last_page", page);
             window.scrollTo(0, 0);
           }}
         />

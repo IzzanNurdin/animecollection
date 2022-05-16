@@ -40,7 +40,7 @@ const StyledPagination = styled.ul`
 const Pagination = ({ handlePageClick, currentPage, hasNextPage }) => {
   return (
     <StyledPagination>
-      <li className={`previous ${currentPage === 1 ? "disabled" : ""}`}>
+      <li className={`previous ${currentPage <= 1 ? "disabled" : ""}`}>
         <button
           disabled={currentPage === 1}
           onClick={() => handlePageClick(currentPage - 1)}
