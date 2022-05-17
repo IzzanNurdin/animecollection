@@ -8,6 +8,11 @@ const LoaderWrapper = styled.div`
   margin-top: 24px;
   width: 100%;
 
+  svg {
+    width: 48px;
+    height: 48px;
+  }
+
   .rotate {
     animation: rotation 2s infinite linear;
   }
