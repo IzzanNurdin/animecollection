@@ -71,19 +71,23 @@ const AnimeDetail = ({ data }) => {
             </div>
             <div className="section">
               <h2>Episode Duration</h2>
-              <p>{Media.duration} Mins</p>
+              <p>{Media.duration ? `${Media.duration} Mins` : "-"}</p>
             </div>
             <div className="section">
               <h2>Format</h2>
-              <p>{readableText(Media.format)}</p>
+              <p>{Media.format ? readableText(Media.format) : "-"}</p>
             </div>
             <div className="section">
               <h2>Status</h2>
-              <p>{readableText(Media.status)}</p>
+              <p>{Media.status ? readableText(Media.status) : "-"}</p>
             </div>
             <div className="section">
               <h2>Season</h2>
-              <p>{`${normalizeText(Media.season)} ${Media.seasonYear}`}</p>
+              <p>
+                {Media.season && Media.seasonYear
+                  ? `${normalizeText(Media.season)} ${Media.seasonYear}`
+                  : "-"}
+              </p>
             </div>
             <div className="section">
               <h2>Start Date</h2>
