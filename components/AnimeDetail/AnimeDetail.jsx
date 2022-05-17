@@ -12,6 +12,7 @@ import { FiPlusCircle } from "react-icons/fi";
 import ReactHtmlParser from "react-html-parser";
 import { dateParser } from "../../utils/dateParser";
 import AddToCollectionModal from "../AddToCollectionModal";
+import { normalizeText, readableText } from "../../utils/readableFormat";
 
 const AnimeDetail = ({ data }) => {
   const { Media } = data;
@@ -31,6 +32,7 @@ const AnimeDetail = ({ data }) => {
         <AddToCollectionModal
           isOpen={openModal}
           onClose={() => setOpenModal(false)}
+          data={Media}
         />
       </HeaderWrapper>
       <DetailWrapper>
@@ -65,26 +67,42 @@ const AnimeDetail = ({ data }) => {
             </div>
             <div className="section">
               <h2>Total Episodes</h2>
-              <p>{Media.episodes}</p>
+              <p>{Media.episodes ? Media.episodes : "-"}</p>
+            </div>
+            <div className="section">
+              <h2>Episode Duration</h2>
+              <p>{Media.duration} Mins</p>
             </div>
             <div className="section">
               <h2>Format</h2>
-              <p>{Media.format}</p>
+              <p>{readableText(Media.format)}</p>
+            </div>
+            <div className="section">
+              <h2>Status</h2>
+              <p>{readableText(Media.status)}</p>
+            </div>
+            <div className="section">
+              <h2>Season</h2>
+              <p>{`${normalizeText(Media.season)} ${Media.seasonYear}`}</p>
             </div>
             <div className="section">
               <h2>Start Date</h2>
               <p>
-                {dateParser(
-                  Media.startDate.day,
-                  Media.startDate.month,
-                  Media.startDate.year
-                )}
+                {Media.startDate.day &&
+                Media.startDate.month &&
+                Media.startDate.year
+                  ? dateParser(
+                      Media.startDate.day,
+                      Media.startDate.month,
+                      Media.startDate.year
+                    )
+                  : "-"}
               </p>
             </div>
             <div className="section">
               <h2>End Date</h2>
               <p>
-                {Media.endDate !== {}
+                {Media.endDate.day && Media.endDate.month && Media.endDate.year
                   ? dateParser(
                       Media.endDate.day,
                       Media.endDate.month,

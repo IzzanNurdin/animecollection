@@ -9,7 +9,6 @@ const GET_ANIME_BY_ID = gql`
   query ($id: Int) {
     Media(id: $id, type: ANIME) {
       id
-      idMal
       startDate {
         year
         month
@@ -22,6 +21,8 @@ const GET_ANIME_BY_ID = gql`
       }
       season
       seasonYear
+      status
+      duration
       bannerImage
       description
       genres
