@@ -6,8 +6,9 @@ import {
   ListWrapper,
   AnimeItem,
   AnimeTitle,
+  EmptyWrapper,
 } from "components/AnimeList/components";
-import { HeaderWrapper } from "components/AnimeDetail/components";
+import { HeaderWrapper } from "components/collection/components";
 import { BackButton } from "components/Buttons";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { ListWrapper as ContentWrapper } from "pages";
@@ -34,7 +35,8 @@ const CollcetionDetail = () => {
       <ContentWrapper>
         <ListWrapper>
           {collectionList &&
-            collectionList[id] &&
+          collectionList[id] &&
+          collectionList[id].length > 0 ? (
             collectionList[id].map((item) => {
               return (
                 <AnimeItem key={item.id} href={`/details/${item.id}`}>
@@ -56,7 +58,12 @@ const CollcetionDetail = () => {
                   </AnimeTitle>
                 </AnimeItem>
               );
-            })}
+            })
+          ) : (
+            <EmptyWrapper>
+              <h1>Anime List is Empty</h1>
+            </EmptyWrapper>
+          )}
         </ListWrapper>
       </ContentWrapper>
     </div>
