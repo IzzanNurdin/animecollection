@@ -10,13 +10,37 @@ import {
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { FiPlusCircle } from "react-icons/fi";
 import ReactHtmlParser from "react-html-parser";
+import { ToastContainer, toast } from "react-toastify";
 import { dateParser } from "../../utils/dateParser";
 import AddToCollectionModal from "../AddToCollectionModal";
 import { normalizeText, readableText } from "../../utils/readableFormat";
+import { listedCollection } from "../../utils/objectChecker";
+import { UseCollectionContext } from "../../context/CollectionContext";
 
 const AnimeDetail = ({ data }) => {
   const { Media } = data;
   const [openModal, setOpenModal] = React.useState(false);
+  const [collectionListed, setCollectionListed] = React.useState([]);
+
+  const { collectionList } = UseCollectionContext();
+
+  React.useEffect(() => {
+    if (collectionList) {
+      setCollectionListed(listedCollection(Media.id));
+    }
+  }, [collectionList, openModal]);
+
+  const showToast = ({ collectionName }) => {
+    toast.success(`Anime added to ${collectionName}`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   return (
     <>
@@ -31,10 +55,24 @@ const AnimeDetail = ({ data }) => {
         </AddButton>
         <AddToCollectionModal
           isOpen={openModal}
-          onClose={() => setOpenModal(false)}
+          onClose={(collectionName) => {
+            setOpenModal(false);
+            collectionName && showToast({ collectionName });
+          }}
           data={Media}
         />
       </HeaderWrapper>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <DetailWrapper>
         <AnimeItem>
           <h1>
@@ -112,6 +150,22 @@ const AnimeDetail = ({ data }) => {
                       Media.endDate.month,
                       Media.endDate.year
                     )
+                  : "-"}
+              </p>
+            </div>
+            <div className="section">
+              <h2>Collection</h2>
+              <p>
+                {collectionListed.length > 0
+                  ? collectionListed.map((item, idx) => {
+                      return (
+                        <a href={`/collection/${item}`}>
+                          {idx === collectionListed.length - 1
+                            ? `${item}`
+                            : `${item}, `}
+                        </a>
+                      );
+                    })
                   : "-"}
               </p>
             </div>

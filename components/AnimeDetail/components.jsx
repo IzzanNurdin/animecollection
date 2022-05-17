@@ -45,6 +45,10 @@ export const AnimeMeta = styled.div`
 
   .section {
     width: 45%;
+
+    a:hover {
+      color: firebrick;
+    }
   }
 
   h2 {

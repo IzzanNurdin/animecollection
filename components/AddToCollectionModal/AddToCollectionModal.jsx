@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
-import { getLocalStorage, setLocalStorage } from "../../utils/webStorage";
+import { setLocalStorage } from "../../utils/webStorage";
+import { checkAvailable } from "../../utils/objectChecker";
 import {
   CloseButton,
   CollectionListWrapper,
@@ -8,13 +9,15 @@ import {
   HeaderWrapper,
   AddButton,
   AddCollectionWrapper,
+  AnimeItem,
 } from "./components";
 import { MdCancel } from "react-icons/md";
 import { FiPlusCircle } from "react-icons/fi";
+import { ToastContainer, toast } from "react-toastify";
 import SearchBar from "../SearchBar";
 import { UseCollectionContext } from "../../context/CollectionContext";
 
-const AddToCollectionModal = ({ isOpen, onClose }) => {
+const AddToCollectionModal = ({ isOpen, onClose, data }) => {
   const {
     collectionList,
     setCollectionList,
@@ -41,12 +44,41 @@ const AddToCollectionModal = ({ isOpen, onClose }) => {
 
   const addNewCollection = (value) => {
     const tmp = collectionList;
-    tmp[value] = {};
+    tmp[value] = [];
     setCollectionList(tmp);
     setFilteredCollection(Object.keys(tmp));
     setLocalStorage("collection_list", JSON.stringify(tmp));
     setNewCollectionName("");
     setAddCollection(false);
+  };
+
+  const addAnimeToCollection = (collection) => {
+    const tmp = collectionList;
+    const dataTmp = {
+      id: data.id,
+      bannerImage: data.bannerImage,
+      title: data.title,
+    };
+    if (checkAvailable(tmp[collection], dataTmp)) {
+      toast.warn(`Anime already added to ${collection}`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      tmp[collection] = [
+        ...tmp[collection],
+        { id: data.id, bannerImage: data.bannerImage, title: data.title },
+      ];
+      setLocalStorage("collection_list", JSON.stringify(tmp));
+      setCollectionList(tmp);
+      setFilteredCollection(Object.keys(tmp));
+      onClose(collection);
+    }
   };
 
   const customStyles = {
@@ -65,8 +97,20 @@ const AddToCollectionModal = ({ isOpen, onClose }) => {
       ariaHideApp={false}
       style={customStyles}
       isOpen={isOpen}
-      onRequestClose={onClose}
+      onRequestClose={() => onClose()}
     >
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
       <HeaderWrapper>
         <h2>Add to Collection</h2>
         <CloseButton onClick={closeModal}>
@@ -116,7 +160,20 @@ const AddToCollectionModal = ({ isOpen, onClose }) => {
             {filteredCollection.length === 0
               ? "No Collection found"
               : filteredCollection.map((item) => {
-                  return <div>{item}</div>;
+                  return (
+                    <AnimeItem onClick={() => addAnimeToCollection(item)}>
+                      <img
+                        src={
+                          collectionList[item].length > 0 &&
+                          collectionList[item][0].bannerImage
+                            ? collectionList[item][0].bannerImage
+                            : "https://via.placeholder.com/120x80?text=Image%20Not%20Found"
+                        }
+                        alt={`anime-${item}`}
+                      />
+                      <label>{item}</label>
+                    </AnimeItem>
+                  );
                 })}
           </CollectionListWrapper>
         )}
