@@ -3,9 +3,7 @@ import {
   AnimeItem,
   DetailWrapper,
   AnimeMeta,
-  BackButton,
   HeaderWrapper,
-  AddButton,
 } from "./components";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { FiPlusCircle } from "react-icons/fi";
@@ -16,6 +14,7 @@ import AddToCollectionModal from "../AddToCollectionModal";
 import { normalizeText, readableText } from "../../utils/readableFormat";
 import { listedCollection } from "../../utils/objectChecker";
 import { UseCollectionContext } from "../../context/CollectionContext";
+import { AddDetailCollectionButton, BackButton } from "components/Buttons";
 
 const AnimeDetail = ({ data }) => {
   const { Media } = data;
@@ -50,9 +49,9 @@ const AnimeDetail = ({ data }) => {
             <RiArrowGoBackLine width={48} height={48} />
           </a>
         </BackButton>
-        <AddButton onClick={() => setOpenModal(true)}>
+        <AddDetailCollectionButton onClick={() => setOpenModal(true)}>
           <FiPlusCircle /> Add to Collection
-        </AddButton>
+        </AddDetailCollectionButton>
         <AddToCollectionModal
           isOpen={openModal}
           onClose={(collectionName) => {

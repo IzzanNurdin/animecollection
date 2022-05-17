@@ -1,12 +1,6 @@
 import styled from "@emotion/styled";
 
-export const ListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-`;
-
-export const AnimeItem = styled.a`
+export const CollectionItem = styled.a`
   all: unset;
   cursor: pointer;
   background-color: #101010;
@@ -37,16 +31,12 @@ export const AnimeItem = styled.a`
   }
 `;
 
-export const EmptyWrapper = styled.div`
+export const HeaderWrapper = styled.div`
   display: flex;
-  justify-content: center;
-`;
-
-export const AnimeTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  label {
-    font-style: italic;
-  }
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 48px;
+  gap: 24px;
+  padding: 24px 64px;
 `;

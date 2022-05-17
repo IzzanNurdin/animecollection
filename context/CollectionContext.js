@@ -11,6 +11,11 @@ export const CollectionContextProvider = (props) => {
   const [collectionList, setCollectionList] = React.useState({});
   const [filteredCollection, setFilteredCollection] = React.useState([]);
 
+  const setCollectionItem = (value) => {
+    setCollectionList(value);
+    setLocalStorage("collection_list", JSON.stringify(value));
+  };
+
   React.useEffect(() => {
     if (getLocalStorage("collection_list") === null) {
       setLocalStorage("collection_list", JSON.stringify({}));
@@ -24,7 +29,7 @@ export const CollectionContextProvider = (props) => {
   // Assign React state and constants to context object
   const CollectionContextObject = {
     collectionList,
-    setCollectionList,
+    setCollectionList: setCollectionItem,
     filteredCollection,
     setFilteredCollection,
   };

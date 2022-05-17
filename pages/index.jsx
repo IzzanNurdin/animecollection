@@ -6,12 +6,7 @@ import { useQuery, gql } from "@apollo/client";
 import AnimeList from "../components/AnimeList";
 import SearchBar from "../components/SearchBar";
 import Loader from "../components/Loader";
-import {
-  getLocalStorage,
-  setLocalStorage,
-  getSessionStorage,
-  setSessionStorage,
-} from "../utils/webStorage";
+import { getSessionStorage, setSessionStorage } from "../utils/webStorage";
 
 const GET_ANIME = gql`
   query ($search: String, $page: Int) {
@@ -43,9 +38,37 @@ const GET_ANIME = gql`
   }
 `;
 
-const ListWrapper = styled.div`
+export const ListWrapper = styled.div`
   width: 100%;
   padding: 48px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+export const HeaderWrapper = styled.div`
+  width: 100%;
+  margin-top: 48px;
+  padding: 12px 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    display: flex;
+    width: 200px;
+    cursor: pointer;
+    justify-content: center;
+    padding: 12px;
+    border: 1px solid white;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+  }
 `;
 
 function GetAnime({ querySearch, currentPage, onChangePage }) {
@@ -93,11 +116,14 @@ export default function Home() {
         <meta name="description" content="Anime List from AniList" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <SearchBar
-        value={querySearch}
-        onChange={setQuery}
-        placeholder="Find your anime here"
-      />
+      <HeaderWrapper>
+        <SearchBar
+          value={querySearch}
+          onChange={setQuery}
+          placeholder="Find your anime here"
+        />
+        <a href="/collection">My Collection</a>
+      </HeaderWrapper>
       <ListWrapper>
         <GetAnime
           querySearch={querySearch}

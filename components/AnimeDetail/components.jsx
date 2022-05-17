@@ -67,36 +67,3 @@ export const HeaderWrapper = styled.div`
   align-items: center;
   padding: 24px 64px;
 `;
-
-export const AddButton = styled.button`
-  all: unset;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  padding: 12px;
-  border: 1px solid white;
-  border-radius: 8px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: white;
-    color: black;
-  }
-`;
-
-export const BackButton = styled.div`
-  a {
-    all: unset;
-    cursor: pointer;
-  }
-
-  svg {
-    width: 32px;
-    height: 32px;
-
-    &:hover {
-      fill: firebrick;
-    }
-  }
-`;

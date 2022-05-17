@@ -1,21 +1,25 @@
 import React from "react";
 import Modal from "react-modal";
-import { setLocalStorage } from "../../utils/webStorage";
-import { checkAvailable } from "../../utils/objectChecker";
 import {
-  CloseButton,
   CollectionListWrapper,
   ContentWrapper,
   HeaderWrapper,
-  AddButton,
   AddCollectionWrapper,
-  AnimeItem,
+  CollectionItem,
 } from "./components";
 import { MdCancel } from "react-icons/md";
 import { FiPlusCircle } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import SearchBar from "../SearchBar";
 import { UseCollectionContext } from "../../context/CollectionContext";
+import {
+  AddNewCollectionButton,
+  CloseCollectionModalButton,
+} from "components/Buttons";
+import {
+  checkCollectionAvailable,
+  checkAnimeAvailable,
+} from "utils/objectChecker";
 
 const AddToCollectionModal = ({ isOpen, onClose, data }) => {
   const {
@@ -44,12 +48,23 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
 
   const addNewCollection = (value) => {
     const tmp = collectionList;
-    tmp[value] = [];
-    setCollectionList(tmp);
-    setFilteredCollection(Object.keys(tmp));
-    setLocalStorage("collection_list", JSON.stringify(tmp));
-    setNewCollectionName("");
-    setAddCollection(false);
+    if (checkCollectionAvailable(Object.keys(tmp), value)) {
+      toast.warn(`${value} already exist`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      tmp[value] = [];
+      setCollectionList(tmp);
+      setFilteredCollection(Object.keys(tmp));
+      setNewCollectionName("");
+      setAddCollection(false);
+    }
   };
 
   const addAnimeToCollection = (collection) => {
@@ -59,7 +74,7 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
       bannerImage: data.bannerImage,
       title: data.title,
     };
-    if (checkAvailable(tmp[collection], dataTmp)) {
+    if (checkAnimeAvailable(tmp[collection], dataTmp)) {
       toast.warn(`Anime already added to ${collection}`, {
         position: "bottom-right",
         autoClose: 5000,
@@ -74,7 +89,6 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
         ...tmp[collection],
         { id: data.id, bannerImage: data.bannerImage, title: data.title },
       ];
-      setLocalStorage("collection_list", JSON.stringify(tmp));
       setCollectionList(tmp);
       setFilteredCollection(Object.keys(tmp));
       onClose(collection);
@@ -113,16 +127,16 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
 
       <HeaderWrapper>
         <h2>Add to Collection</h2>
-        <CloseButton onClick={closeModal}>
+        <CloseCollectionModalButton onClick={closeModal}>
           <MdCancel />
-        </CloseButton>
+        </CloseCollectionModalButton>
       </HeaderWrapper>
       <ContentWrapper>
         {!isAddCollection ? (
-          <AddButton onClick={() => setAddCollection(true)}>
+          <AddNewCollectionButton onClick={() => setAddCollection(true)}>
             <FiPlusCircle />
             Add new collection
-          </AddButton>
+          </AddNewCollectionButton>
         ) : (
           <AddCollectionWrapper>
             <input
@@ -161,7 +175,10 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
               ? "No Collection found"
               : filteredCollection.map((item) => {
                   return (
-                    <AnimeItem onClick={() => addAnimeToCollection(item)}>
+                    <CollectionItem
+                      key={item.id}
+                      onClick={() => addAnimeToCollection(item)}
+                    >
                       <img
                         src={
                           collectionList[item].length > 0 &&
@@ -172,7 +189,7 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
                         alt={`anime-${item}`}
                       />
                       <label>{item}</label>
-                    </AnimeItem>
+                    </CollectionItem>
                   );
                 })}
           </CollectionListWrapper>

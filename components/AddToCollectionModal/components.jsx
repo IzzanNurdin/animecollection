@@ -7,43 +7,11 @@ export const HeaderWrapper = styled.div`
   align-items: center;
 `;
 
-export const CloseButton = styled.button`
-  all: unset;
-  cursor: pointer;
-
-  svg {
-    fill: red;
-    width: 32px;
-    height: 32px;
-    &:hover {
-      fill: firebrick;
-    }
-  }
-`;
-
-export const AddButton = styled.button`
-  all: unset;
-  padding: 12px;
-  border: 1px solid black;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  width: fit-content;
-
-  &:hover {
-    border: 1px solid firebrick;
-    background-color: firebrick;
-    color: white;
-  }
-`;
-
 export const AddCollectionWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 24px;
   gap: 8px;
 
   input {
@@ -57,6 +25,7 @@ export const AddCollectionWrapper = styled.div`
     border: 1px solid transparent;
     border-radius: 8px;
     cursor: pointer;
+    float: right;
     color: white;
   }
 `;
@@ -75,7 +44,7 @@ export const CollectionListWrapper = styled.div`
   gap: 24px;
 `;
 
-export const AnimeItem = styled.button`
+export const CollectionItem = styled.button`
   all: unset;
   cursor: pointer;
   border: 1px solid black;
