@@ -16,6 +16,10 @@ export const AnimeItem = styled.div`
     margin-bottom: 24px;
   }
 
+  h1 {
+    color: firebrick;
+  }
+
   h2,
   h3,
   p {
@@ -52,15 +56,43 @@ export const AnimeMeta = styled.div`
   }
 `;
 
-export const BackButton = styled.div`
+export const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding: 24px 64px;
+`;
+
+export const AddButton = styled.button`
+  all: unset;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid white;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+`;
+
+export const BackButton = styled.div`
   a {
     all: unset;
     cursor: pointer;
   }
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+      fill: firebrick;
+    }
   }
 `;

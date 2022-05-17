@@ -6,7 +6,12 @@ import { useQuery, gql } from "@apollo/client";
 import AnimeList from "../components/AnimeList";
 import SearchBar from "../components/SearchBar";
 import Loader from "../components/Loader";
-import { getSessionStorage, setSessionStorage } from "../utils/webStorage";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  getSessionStorage,
+  setSessionStorage,
+} from "../utils/webStorage";
 
 const GET_ANIME = gql`
   query ($search: String, $page: Int) {
@@ -67,14 +72,16 @@ export default function Home() {
   const [querySearch, setQuerySearch] = React.useState(null);
 
   React.useEffect(() => {
-    setQuerySearch(getSessionStorage("search"));
+    setQuerySearch(
+      getSessionStorage("search") === "" ? null : getSessionStorage("search")
+    );
     setCurrentPage(
       getSessionStorage("last_page") ? getSessionStorage("last_page") : 1
     );
   }, []);
 
   const setQuery = React.useCallback((value) => {
-    setQuerySearch(value);
+    setQuerySearch(value === "" ? null : value);
     setCurrentPage(1);
     setSessionStorage("search", value);
   });
@@ -86,7 +93,11 @@ export default function Home() {
         <meta name="description" content="Anime List from AniList" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <SearchBar value={querySearch} onChange={setQuery} />
+      <SearchBar
+        value={querySearch}
+        onChange={setQuery}
+        placeholder="Find your anime here"
+      />
       <ListWrapper>
         <GetAnime
           querySearch={querySearch}

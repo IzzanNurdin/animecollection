@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { CollectionContextProvider } from "../context/CollectionContext";
 
 const client = new ApolloClient({
   // uri: "https://48p1r2roz4.sse.codesandbox.io",
@@ -9,9 +10,11 @@ const client = new ApolloClient({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ApolloProvider client={client}>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <CollectionContextProvider>
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
+    </CollectionContextProvider>
   );
 }
 

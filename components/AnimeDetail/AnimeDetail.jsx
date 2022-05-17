@@ -1,20 +1,38 @@
 import React from "react";
-import { AnimeItem, DetailWrapper, AnimeMeta, BackButton } from "./components";
+import {
+  AnimeItem,
+  DetailWrapper,
+  AnimeMeta,
+  BackButton,
+  HeaderWrapper,
+  AddButton,
+} from "./components";
 import { RiArrowGoBackLine } from "react-icons/ri";
+import { FiPlusCircle } from "react-icons/fi";
 import ReactHtmlParser from "react-html-parser";
 import { dateParser } from "../../utils/dateParser";
+import AddToCollectionModal from "../AddToCollectionModal";
 
 const AnimeDetail = ({ data }) => {
   const { Media } = data;
-  console.log(Media);
+  const [openModal, setOpenModal] = React.useState(false);
 
   return (
     <>
-      <BackButton>
-        <a href="/">
-          <RiArrowGoBackLine width={48} height={48} />
-        </a>
-      </BackButton>
+      <HeaderWrapper>
+        <BackButton>
+          <a href="/">
+            <RiArrowGoBackLine width={48} height={48} />
+          </a>
+        </BackButton>
+        <AddButton onClick={() => setOpenModal(true)}>
+          <FiPlusCircle /> Add to Collection
+        </AddButton>
+        <AddToCollectionModal
+          isOpen={openModal}
+          onClose={() => setOpenModal(false)}
+        />
+      </HeaderWrapper>
       <DetailWrapper>
         <AnimeItem>
           <h1>

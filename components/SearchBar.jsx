@@ -15,17 +15,18 @@ const Input = styled(DebounceInput)`
   padding: 12px 24px;
   border: 1px solid black;
   border-radius: 12px;
-  width: 50%;
+  width: ${(props) => (props.width ? props.width : "50%")};
 `;
 
-export default function SearchBar({ value, onChange }) {
+export default function SearchBar({ value, onChange, placeholder, width }) {
   return (
     <InputWrapper>
       <Input
         value={value}
         debounceTimeout={500}
-        placeholder="Find your anime here"
+        placeholder={placeholder}
         type="text"
+        width={width}
         onChange={(e) => onChange(e.target.value)}
       />
     </InputWrapper>
