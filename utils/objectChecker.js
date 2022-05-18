@@ -46,10 +46,9 @@ export function removeAnimeCollection(
   collectionList,
   setCollectionList
 ) {
-  const keyList = Object.keys(collectionList);
   const tmp = collectionList;
 
-  for (let i = 0; i < collectionList[keyList[i]].length; i++) {
+  for (let i = 0; i < collectionList[collectionId].length; i++) {
     if (collectionList[collectionId][i].id === animeId) {
       tmp[collectionId].splice(i, 1);
       setCollectionList(tmp);
