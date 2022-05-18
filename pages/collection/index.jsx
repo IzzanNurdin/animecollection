@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { getSessionStorage, setSessionStorage } from "utils/webStorage";
 import {
   CollectionAction,
@@ -78,9 +79,9 @@ const CollectionList = () => {
       />
       <HeaderWrapper>
         <BackButton>
-          <a href="/">
+          <Link href="/">
             <RiArrowGoBackLine width={48} height={48} />
-          </a>
+          </Link>
         </BackButton>
         <SearchBar
           value={querySearch}

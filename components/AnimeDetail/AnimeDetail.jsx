@@ -5,6 +5,7 @@ import {
   AnimeMeta,
   HeaderWrapper,
 } from "./components";
+import Link from "next/link";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { FiPlusCircle } from "react-icons/fi";
 import ReactHtmlParser from "react-html-parser";
@@ -45,9 +46,9 @@ const AnimeDetail = ({ data }) => {
     <>
       <HeaderWrapper>
         <BackButton>
-          <a href="/">
+          <Link href="/">
             <RiArrowGoBackLine width={48} height={48} />
-          </a>
+          </Link>
         </BackButton>
         <AddDetailCollectionButton onClick={() => setOpenModal(true)}>
           <FiPlusCircle /> Add to Collection
@@ -158,11 +159,14 @@ const AnimeDetail = ({ data }) => {
                 {collectionListed.length > 0
                   ? collectionListed.map((item, idx) => {
                       return (
-                        <a href={`/collection/${item}`}>
+                        <Link
+                          key={`${idx}-${item}`}
+                          href={`/collection/${item}`}
+                        >
                           {idx === collectionListed.length - 1
                             ? `${item}`
                             : `${item}, `}
-                        </a>
+                        </Link>
                       );
                     })
                   : "-"}

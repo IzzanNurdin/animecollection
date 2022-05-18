@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import styles from "../styles/Home.module.css";
+import Link from "next/link";
 import styled from "@emotion/styled";
 import { useQuery, gql } from "@apollo/client";
 import AnimeList from "../components/AnimeList";
@@ -138,7 +138,7 @@ export default function Home() {
           onChange={setQuery}
           placeholder="Find your anime here"
         />
-        <a href="/collection">My Collection</a>
+        <Link href="/collection">My Collection</Link>
       </HeaderWrapper>
       <ListWrapper>
         <GetAnime
