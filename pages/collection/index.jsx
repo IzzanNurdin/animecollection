@@ -32,7 +32,7 @@ const CollectionList = () => {
 
   React.useEffect(() => {
     setQuerySearch(
-      getSessionStorage("collection_search") === ""
+      !getSessionStorage("collection_search")
         ? ""
         : getSessionStorage("collection_search")
     );

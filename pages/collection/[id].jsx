@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { UseCollectionContext } from "context/CollectionContext";
 import {
   ListWrapper,
@@ -52,9 +53,9 @@ const CollcetionDetail = () => {
       />
       <HeaderWrapper>
         <BackButton>
-          <a href="/collection">
+          <Link href="/collection">
             <RiArrowGoBackLine width={48} height={48} />
-          </a>
+          </Link>
         </BackButton>
         <h1>{id}</h1>
       </HeaderWrapper>
