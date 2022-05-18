@@ -45,6 +45,7 @@ const CollcetionDetail = () => {
         onConfirm={() =>
           removeAnimeCollection(
             selectedAnime,
+            id,
             collectionList,
             setCollectionList
           )

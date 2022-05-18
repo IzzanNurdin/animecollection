@@ -39,34 +39,28 @@ export function listedCollection(animeId) {
   return listResult;
 }
 
+/** Remove Anime from collection */
 export function removeAnimeCollection(
   animeId,
+  collectionId,
   collectionList,
   setCollectionList
 ) {
   const keyList = Object.keys(collectionList);
-
-  let removed = false;
   const tmp = collectionList;
 
-  for (let i = 0; i < keyList.length; i++) {
-    for (let j = 0; j < collectionList[keyList[i]].length; j++) {
-      if (collectionList[keyList[i]][j].id === animeId) {
-        tmp[keyList[i]].splice(j, 1);
-        setCollectionList(tmp);
-        removed = true;
-        break;
-      }
-    }
-    if (removed) {
+  for (let i = 0; i < collectionList[keyList[i]].length; i++) {
+    if (collectionList[collectionId][i].id === animeId) {
+      tmp[collectionId].splice(i, 1);
+      setCollectionList(tmp);
       break;
     }
   }
 }
 
+/** Remove collection */
 export function removeCollection(item, collectionList, setCollectionList) {
   const tmp = collectionList;
   delete tmp[item];
-  console.log(tmp);
   setCollectionList(tmp);
 }
