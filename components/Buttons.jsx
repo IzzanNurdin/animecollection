@@ -68,3 +68,33 @@ export const BackButton = styled.div`
     }
   }
 `;
+
+export const ConfirmButton = styled.button`
+  all: unset;
+  padding: 12px;
+  border: 1px solid green;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100px;
+
+  &:hover {
+    background-color: green;
+    color: white;
+  }
+`;
+
+export const SecondaryButton = styled.button`
+  all: unset;
+  padding: 12px;
+  border: 1px solid grey;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100px;
+
+  &:hover {
+    background-color: grey;
+    color: white;
+  }
+`;

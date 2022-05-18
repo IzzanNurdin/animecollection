@@ -13,6 +13,7 @@ export const CollectionContextProvider = (props) => {
 
   const setCollectionItem = (value) => {
     setCollectionList(value);
+    setFilteredCollection(Object.keys(value));
     setLocalStorage("collection_list", JSON.stringify(value));
   };
 

@@ -153,7 +153,7 @@ const AnimeDetail = ({ data }) => {
               </p>
             </div>
             <div className="section">
-              <h2>Collection</h2>
+              <h2>My Collection</h2>
               <p>
                 {collectionListed.length > 0
                   ? collectionListed.map((item, idx) => {

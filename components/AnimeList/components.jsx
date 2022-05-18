@@ -12,9 +12,9 @@ export const AnimeItem = styled.a`
   background-color: #101010;
   border: 1px solid black;
   display: flex;
-  gap: 24px;
   padding: 24px;
   align-items: center;
+  justify-content: space-between;
   flex-direction: row;
   border-radius: 16px;
   height: fit-content;
@@ -34,6 +34,40 @@ export const AnimeItem = styled.a`
 
   h3 {
     margin: 12px 0px;
+  }
+`;
+
+export const AnimeMeta = styled.div`
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const AnimeAction = styled.div`
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+  align-items: center;
+
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: firebrick;
+  }
+
+  button {
+    all: unset;
+    padding: 12px;
+    display: flex;
+    border: 1px solid transparent;
+    align-items: center;
+    border-radius: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: white;
+    }
   }
 `;
 

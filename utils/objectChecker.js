@@ -1,4 +1,5 @@
-import { getLocalStorage } from "./webStorage";
+import { UseCollectionContext } from "context/CollectionContext";
+import { getLocalStorage, setLocalStorage } from "./webStorage";
 
 /** Return true if anime already available in collection */
 export function checkAnimeAvailable(currCollection, anime) {
@@ -13,7 +14,6 @@ export function checkAnimeAvailable(currCollection, anime) {
 
 /** Return true if collection name already available */
 export function checkCollectionAvailable(collectionKeys, collectionName) {
-  console.log(collectionKeys);
   if (collectionKeys.indexOf(collectionName) >= 0) {
     return true;
   }
@@ -37,4 +37,36 @@ export function listedCollection(animeId) {
   }
 
   return listResult;
+}
+
+export function removeAnimeCollection(
+  animeId,
+  collectionList,
+  setCollectionList
+) {
+  const keyList = Object.keys(collectionList);
+
+  let removed = false;
+  const tmp = collectionList;
+
+  for (let i = 0; i < keyList.length; i++) {
+    for (let j = 0; j < collectionList[keyList[i]].length; j++) {
+      if (collectionList[keyList[i]][j].id === animeId) {
+        tmp[keyList[i]].splice(j, 1);
+        setCollectionList(tmp);
+        removed = true;
+        break;
+      }
+    }
+    if (removed) {
+      break;
+    }
+  }
+}
+
+export function removeCollection(item, collectionList, setCollectionList) {
+  const tmp = collectionList;
+  delete tmp[item];
+  console.log(tmp);
+  setCollectionList(tmp);
 }

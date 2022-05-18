@@ -124,7 +124,6 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
         draggable
         pauseOnHover
       />
-
       <HeaderWrapper>
         <h2>Add to Collection</h2>
         <CloseCollectionModalButton onClick={closeModal}>

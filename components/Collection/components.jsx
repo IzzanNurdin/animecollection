@@ -6,10 +6,10 @@ export const CollectionItem = styled.a`
   background-color: #101010;
   border: 1px solid black;
   display: flex;
-  gap: 24px;
   padding: 24px;
   align-items: center;
   flex-direction: row;
+  justify-content: space-between;
   border-radius: 16px;
   height: fit-content;
   transition: box-shadow 300ms ease, transform 300ms ease,
@@ -31,12 +31,44 @@ export const CollectionItem = styled.a`
   }
 `;
 
+export const CollectionMeta = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+`;
+
+export const CollectionAction = styled.div`
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+  align-items: center;
+
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: firebrick;
+  }
+
+  button {
+    all: unset;
+    padding: 12px;
+    display: flex;
+    border: 1px solid transparent;
+    align-items: center;
+    border-radius: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+`;
+
 export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 48px;
   gap: 24px;
   padding: 24px 64px;
 `;
