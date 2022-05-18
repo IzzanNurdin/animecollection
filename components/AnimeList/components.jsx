@@ -25,6 +25,10 @@ export const AnimeItem = styled.a`
     box-shadow: 0px 48px 44px 0px #566e9b10;
     transform: translate(0px, -8px);
   }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const AnimeMeta = styled.div`

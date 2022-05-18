@@ -20,6 +20,18 @@ export const CollectionItem = styled.a`
     transform: translate(0px, -8px);
   }
 
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 24px;
+  }
+`;
+
+export const CollectionMeta = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+
   img {
     width: 350px;
     height: 130px;
@@ -29,13 +41,16 @@ export const CollectionItem = styled.a`
   h3 {
     margin: 12px 0px;
   }
-`;
 
-export const CollectionMeta = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 24px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 24px;
+
+    img {
+      width: 100%;
+      height: 130px;
+    }
+  }
 `;
 
 export const CollectionAction = styled.div`
@@ -71,4 +86,9 @@ export const HeaderWrapper = styled.div`
   align-items: center;
   gap: 24px;
   padding: 24px 64px;
+
+  @media screen and (max-width: 768px) {
+    padding: 24px;
+    flex-direction: column;
+  }
 `;

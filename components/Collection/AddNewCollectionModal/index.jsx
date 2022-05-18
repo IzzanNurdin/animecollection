@@ -8,8 +8,20 @@ import {
 import { MdCancel } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import { UseCollectionContext } from "context/CollectionContext";
-import { CloseCollectionModalButton } from "components/Buttons";
+import { ButtonGroup, CloseCollectionModalButton } from "components/Buttons";
 import { checkCollectionAvailable } from "utils/objectChecker";
+import styled from "@emotion/styled";
+
+const ModalStyled = styled(Modal)`
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 500px;
+
+  @media screen and (max-width: 768px) {
+    width: 300px;
+  }
+`;
 
 const AddNewCollectionModal = ({ isOpen, onClose }) => {
   const { collectionList, setCollectionList, setFilteredCollection } =
@@ -47,15 +59,14 @@ const AddNewCollectionModal = ({ isOpen, onClose }) => {
       backgroundColor: "rgba(0, 0, 0, 0.8)",
     },
     content: {
-      width: "500px",
       height: "fit-content",
       color: "black",
-      margin: "0 auto",
+      margin: "24px auto",
     },
   };
 
   return (
-    <Modal
+    <ModalStyled
       ariaHideApp={false}
       style={customStyles}
       isOpen={isOpen}
@@ -86,24 +97,26 @@ const AddNewCollectionModal = ({ isOpen, onClose }) => {
             onChange={(e) => setNewCollectionName(e.target.value)}
             value={newCollectionName}
           />
-          <button
-            onClick={() => addNewCollection(newCollectionName)}
-            style={{ backgroundColor: "green" }}
-          >
-            Add
-          </button>
-          <button
-            style={{ backgroundColor: "firebrick" }}
-            onClick={() => {
-              onClose();
-              setNewCollectionName("");
-            }}
-          >
-            Cancel
-          </button>
+          <ButtonGroup>
+            <button
+              onClick={() => addNewCollection(newCollectionName)}
+              style={{ backgroundColor: "green", width: "100px" }}
+            >
+              Add
+            </button>
+            <button
+              style={{ backgroundColor: "firebrick", width: "100px" }}
+              onClick={() => {
+                onClose();
+                setNewCollectionName("");
+              }}
+            >
+              Cancel
+            </button>
+          </ButtonGroup>
         </AddCollectionWrapper>
       </ContentWrapper>
-    </Modal>
+    </ModalStyled>
   );
 };
 

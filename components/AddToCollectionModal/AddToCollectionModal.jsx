@@ -161,12 +161,12 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
             <ButtonGroup>
               <button
                 onClick={() => addNewCollection(newCollectionName)}
-                style={{ backgroundColor: "green" }}
+                style={{ backgroundColor: "green", width: "100px" }}
               >
                 Add
               </button>
               <button
-                style={{ backgroundColor: "firebrick" }}
+                style={{ backgroundColor: "firebrick", width: "100px" }}
                 onClick={() => {
                   setAddCollection(false);
                   setNewCollectionName("");

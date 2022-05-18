@@ -126,7 +126,7 @@ export default function Home() {
   });
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Anime List</title>
         <meta name="description" content="Anime List from AniList" />

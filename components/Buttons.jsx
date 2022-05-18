@@ -107,5 +107,6 @@ export const ButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  gap: 24px;
   justify-content: space-evenly;
 `;
