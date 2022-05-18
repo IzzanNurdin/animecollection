@@ -25,6 +25,13 @@ export const AnimeItem = styled.a`
     box-shadow: 0px 48px 44px 0px #566e9b10;
     transform: translate(0px, -8px);
   }
+`;
+
+export const AnimeMeta = styled.div`
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+  align-items: center;
 
   img {
     width: 350px;
@@ -35,13 +42,15 @@ export const AnimeItem = styled.a`
   h3 {
     margin: 12px 0px;
   }
-`;
 
-export const AnimeMeta = styled.div`
-  display: flex;
-  gap: 24px;
-  flex-direction: row;
-  align-items: center;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    img {
+      width: 100%;
+    }
+  }
 `;
 
 export const AnimeAction = styled.div`

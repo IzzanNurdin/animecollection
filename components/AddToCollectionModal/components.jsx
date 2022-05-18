@@ -14,6 +14,10 @@ export const AddCollectionWrapper = styled.div`
   margin-bottom: 24px;
   gap: 8px;
 
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+
   input {
     padding: 12px 24px;
     border-radius: 12px;
@@ -25,7 +29,6 @@ export const AddCollectionWrapper = styled.div`
     border: 1px solid transparent;
     border-radius: 8px;
     cursor: pointer;
-    float: right;
     color: white;
   }
 `;

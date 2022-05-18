@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 import Modal from "react-modal";
-import { ConfirmButton, SecondaryButton } from "./Buttons";
+import { ConfirmButton, SecondaryButton, ButtonGroup } from "./Buttons";
 
 const customStyles = {
   overlay: {
@@ -17,13 +17,6 @@ const customStyles = {
     margin: "0 auto",
   },
 };
-
-const ButtonGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-evenly;
-`;
 
 const ConfirmationModal = ({ isOpen, onClose, question, onConfirm }) => {
   return (

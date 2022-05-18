@@ -11,11 +11,15 @@ export const AddDetailCollectionButton = styled.button`
   border: 1px solid white;
   border-radius: 8px;
   cursor: pointer;
-  width: 200px;
+  width: 250px;
 
   &:hover {
     background-color: white;
     color: black;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
   }
 `;
 
@@ -97,4 +101,11 @@ export const SecondaryButton = styled.button`
     background-color: grey;
     color: white;
   }
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
 `;

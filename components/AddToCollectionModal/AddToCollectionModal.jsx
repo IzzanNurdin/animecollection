@@ -14,12 +14,28 @@ import SearchBar from "../SearchBar";
 import { UseCollectionContext } from "../../context/CollectionContext";
 import {
   AddNewCollectionButton,
+  ButtonGroup,
   CloseCollectionModalButton,
 } from "components/Buttons";
 import {
   checkCollectionAvailable,
   checkAnimeAvailable,
 } from "utils/objectChecker";
+import styled from "@emotion/styled";
+
+const ModalStyled = styled(Modal)`
+  width: 500px;
+  height: 80%;
+  overflow: auto;
+  background-color: white;
+  top: 24px;
+  border-radius: 12px;
+  padding: 12px 24px;
+
+  @media screen and (max-width: 768px) {
+    width: 350px;
+  }
+`;
 
 const AddToCollectionModal = ({ isOpen, onClose, data }) => {
   const {
@@ -100,14 +116,13 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
       backgroundColor: "rgba(0, 0, 0, 0.8)",
     },
     content: {
-      width: "500px",
       color: "black",
-      margin: "0 auto",
+      margin: "24px auto",
     },
   };
 
   return (
-    <Modal
+    <ModalStyled
       ariaHideApp={false}
       style={customStyles}
       isOpen={isOpen}
@@ -143,21 +158,23 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
               onChange={(e) => setNewCollectionName(e.target.value)}
               value={newCollectionName}
             />
-            <button
-              onClick={() => addNewCollection(newCollectionName)}
-              style={{ backgroundColor: "green" }}
-            >
-              Add
-            </button>
-            <button
-              style={{ backgroundColor: "firebrick" }}
-              onClick={() => {
-                setAddCollection(false);
-                setNewCollectionName("");
-              }}
-            >
-              Cancel
-            </button>
+            <ButtonGroup>
+              <button
+                onClick={() => addNewCollection(newCollectionName)}
+                style={{ backgroundColor: "green" }}
+              >
+                Add
+              </button>
+              <button
+                style={{ backgroundColor: "firebrick" }}
+                onClick={() => {
+                  setAddCollection(false);
+                  setNewCollectionName("");
+                }}
+              >
+                Cancel
+              </button>
+            </ButtonGroup>
           </AddCollectionWrapper>
         )}
         <SearchBar
@@ -194,7 +211,7 @@ const AddToCollectionModal = ({ isOpen, onClose, data }) => {
           </CollectionListWrapper>
         )}
       </ContentWrapper>
-    </Modal>
+    </ModalStyled>
   );
 };
 

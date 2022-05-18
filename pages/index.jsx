@@ -44,6 +44,10 @@ export const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  @media screen and (max-width: 768px) {
+    padding: 12px;
+  }
 `;
 
 export const HeaderWrapper = styled.div`
@@ -51,6 +55,7 @@ export const HeaderWrapper = styled.div`
   margin-top: 48px;
   padding: 12px 64px;
   display: flex;
+  gap: 24px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -67,6 +72,16 @@ export const HeaderWrapper = styled.div`
     &:hover {
       background-color: white;
       color: black;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 24px;
+    padding: 12px;
+
+    a {
+      width: 100%;
     }
   }
 `;
@@ -106,6 +121,7 @@ export default function Home() {
   const setQuery = React.useCallback((value) => {
     setQuerySearch(value === "" ? null : value);
     setCurrentPage(1);
+    setSessionStorage("last_page", 1);
     setSessionStorage("search", value);
   });
 
